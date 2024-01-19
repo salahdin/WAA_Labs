@@ -2,18 +2,23 @@ package com.waa.lab2.service;
 
 
 import com.waa.lab2.dto.PostDto;
+import com.waa.lab2.dto.UserDto;
 import com.waa.lab2.model.Post;
+import com.waa.lab2.model.User;
 import com.waa.lab2.repository.PostRepository;
+import com.waa.lab2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
 
@@ -23,8 +28,13 @@ public class PostService {
         return modelMapper.map(post, PostDto.class);
     }
 
-    public PostDto addPost(PostDto postDto){
+    public PostDto addPost(PostDto postDto, UserDto userDto){
+        Optional<User> existingUser = userRepository.findUserByName(userDto.getName());
+        if(existingUser.isEmpty()){
+            throw new RuntimeException("User with name " + userDto.getName() + " not found");
+        }
         Post post = modelMapper.map(postDto, Post.class);
+        post.setAuthor(existingUser.get());
         return modelMapper.map(postRepository.save(post), PostDto.class);
     }
 

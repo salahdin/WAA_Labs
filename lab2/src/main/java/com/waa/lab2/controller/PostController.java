@@ -1,6 +1,7 @@
 package com.waa.lab2.controller;
 
 import com.waa.lab2.dto.PostDto;
+import com.waa.lab2.dto.UserDto;
 import com.waa.lab2.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,8 +25,8 @@ public class PostController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PostDto> addPost(@RequestBody PostDto postDto){
-        PostDto createdPostDto = postService.addPost(postDto);
+    public ResponseEntity<PostDto> addPost(@RequestBody PostDto postDto, @RequestBody UserDto userDto){
+        PostDto createdPostDto = postService.addPost(postDto, userDto);
         return new ResponseEntity<>(createdPostDto, HttpStatus.CREATED);
     }
 
