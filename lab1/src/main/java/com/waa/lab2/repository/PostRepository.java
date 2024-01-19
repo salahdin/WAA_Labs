@@ -1,6 +1,6 @@
-package com.waa.lab1.repository;
+package com.waa.lab2.repository;
 
-import com.waa.lab1.model.Post;
+import com.waa.lab2.model.Post;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;

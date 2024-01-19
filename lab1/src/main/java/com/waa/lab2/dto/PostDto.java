@@ -1,10 +1,9 @@
-package com.waa.lab1.model;
+package com.waa.lab2.dto;
 
 import lombok.Data;
 
 @Data
-public class Post {
-    Long id;
+public class PostDto {
     String title;
     String content;
     String author;

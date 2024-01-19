@@ -1,7 +1,7 @@
-package com.waa.lab1.controller;
+package com.waa.lab2.controller;
 
-import com.waa.lab1.dto.PostDto;
-import com.waa.lab1.service.PostService;
+import com.waa.lab2.dto.PostDto;
+import com.waa.lab2.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class PostController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<PostDto>> getAllPosts(){
-        return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(postService.findAllPosts(), HttpStatus.OK);
     }
 
     @PutMapping
@@ -47,11 +47,5 @@ public class PostController {
     public ResponseEntity<String> deletePost(@PathVariable String id){
         postService.deletePost(id);
         return new ResponseEntity<>("Post deleted successfully", HttpStatus.OK);
-    }
-
-    @GetMapping("/author/{author}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<PostDto>> findPostByAuthor(@PathVariable String author){
-        return new ResponseEntity<>(postService.findPostByAuthor(author), HttpStatus.OK);
     }
 }

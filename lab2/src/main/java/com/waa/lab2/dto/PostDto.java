@@ -1,4 +1,4 @@
-package com.waa.lab1.dto;
+package com.waa.lab2.dto;
 
 import lombok.Data;
 
