@@ -31,7 +31,7 @@ public class LoggerAspect {
     }
 
   @Around("@annotation(com.waa.lab4.annotation.ExecutionTime)")
-  public Object calculateTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+  public Object calulateTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
       StopWatch stopWatch = new StopWatch();
       stopWatch.start(proceedingJoinPoint.getSignature().getName());
       Object retVal = proceedingJoinPoint.proceed();
