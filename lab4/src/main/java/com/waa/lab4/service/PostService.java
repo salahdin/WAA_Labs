@@ -1,6 +1,7 @@
 package com.waa.lab4.service;
 
 
+import com.waa.lab4.annotation.ExecutionTime;
 import com.waa.lab4.annotation.Logger;
 import com.waa.lab4.dto.CommentDto;
 import com.waa.lab4.dto.PostDto;
@@ -25,6 +26,7 @@ public class PostService {
     private final ModelMapper modelMapper;
 
 
+    @ExecutionTime
     public PostDto getPost(String id){
         long id1 = Long.parseLong(id);
         Post post = postRepository.findById(id1).orElseThrow(() -> new RuntimeException("Post with id " + id + " not found"));
