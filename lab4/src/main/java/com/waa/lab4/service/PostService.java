@@ -35,12 +35,10 @@ public class PostService {
 
     @Logger
     public PostDto addPost(PostDto postDto, UserDto userDto){
-        Optional<User> existingUser = userRepository.findUserByName(userDto.getName());
-        if(existingUser.isEmpty()){
-            throw new RuntimeException("User with name " + userDto.getName() + " not found");
-        }
+        User existingUser = userRepository.findUserByName(userDto.getName())
+                .orElseThrow(() -> new RuntimeException("User with name " + userDto.getName() + " not found"));
         Post post = modelMapper.map(postDto, Post.class);
-        post.setAuthor(existingUser.get());
+        post.setAuthor(existingUser);
         return modelMapper.map(postRepository.save(post), PostDto.class);
     }
 
