@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Posts from '../components/Posts';
 import PostDetail from '../components/PostDetail'
+import axios from 'axios';
 
 const Dashboard = () => {
     const [posts, setPosts] = useState([
@@ -15,6 +16,14 @@ const Dashboard = () => {
     const handleTitleChange = (event) => {
         setNewTitle(event.target.value);
     };
+
+    useEffect(()=>{
+        axios.get('http://localhost:8080/api/v1/posts')
+        .then(response => {
+            setPosts(response.data)
+        })
+        .catch(error => console.log(error))
+    },[]);
 
     const handlePostClick = (post) =>{
         setSelectPost(post);
